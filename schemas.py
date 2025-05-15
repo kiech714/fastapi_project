@@ -1,5 +1,13 @@
 from pydantic import BaseModel
 
+class PersonTypeBase(BaseModel):
+    name: str
+
+class PersonType(PersonTypeBase):
+    id: int
+    class Config:
+        orm_mode = True
+
 class PersonBase(BaseModel):
     first_name: str
     last_name: str
@@ -7,13 +15,6 @@ class PersonBase(BaseModel):
 
 class Person(PersonBase):
     id: int
-    class Config:
-        orm_mode = True
-
-class PersonTypeBase(BaseModel):
-    name: str
-
-class PersonType(PersonTypeBase):
-    id: int
+    person_type: PersonType
     class Config:
         orm_mode = True
