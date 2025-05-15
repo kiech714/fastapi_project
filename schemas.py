@@ -5,7 +5,7 @@ class PersonType(BaseModel):
     name: str
 
     class Config:
-        from_attributes = True
+        orm_mode = True
 
 class PersonBase(BaseModel):
     first_name: str
@@ -17,4 +17,4 @@ class Person(PersonBase):
     person_type: PersonType
 
     class Config:
-        from_attributes = True
+        orm_mode = True
