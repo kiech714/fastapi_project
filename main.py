@@ -12,17 +12,9 @@ Base.metadata.create_all(bind=engine)
 def get_persons(db: Session = Depends(get_db)):
     return db.query(Person).all()
 
-@app.post("/persons/", response_model=schemas.Person)
-def create_person(person: schemas.PersonBase, db: Session = Depends(get_db)):
-    new_person = Person(**person.dict())
-    db.add(new_person)
-    db.commit()
-    db.refresh(new_person)
-    return new_person
-
-@app.post("/persontypes/", response_model=schemas.PersonType)
-def create_person_type(person_type: schemas.PersonType, db: Session = Depends(get_db)):
-    new_type = PersonType(**person_type.dict())
+@app.post("/person-types/", response_model=schemas.PersonType)
+def create_person_type(person_type: schemas.PersonTypeBase, db: Session = Depends(get_db)):
+    new_type = PersonType(name=person_type.name)
     db.add(new_type)
     db.commit()
     db.refresh(new_type)
